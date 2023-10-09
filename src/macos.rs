@@ -9,7 +9,7 @@ pub fn get() -> Result<String> {
         "osascript",
         &[
             "-e",
-            r#"tell application "Finder" to get POSIX path of (get desktop picture as alias)"#,
+            r#"tell application "System Events" to picture of current desktop"#,
         ],
     )
 }
