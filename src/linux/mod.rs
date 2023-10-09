@@ -125,6 +125,9 @@ pub fn set_mode(mode: Mode) -> Result<()> {
     }
 }
 
+pub fn get_mode() -> Result<Mode> {
+    Err(UnsupportedDesktop)
+}
 fn parse_dconf(command: &str, args: &[&str]) -> Result<String> {
     let mut stdout = enquote::unquote(&get_stdout(command, args)?)?;
     // removes file protocol

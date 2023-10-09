@@ -29,3 +29,7 @@ pub fn set_from_path(path: &str) -> Result<()> {
 pub fn set_mode(_: Mode) -> Result<()> {
     Err(UnsupportedDesktop)
 }
+
+pub fn get_mode(_: Mode) -> Result<()> {
+    Err(UnsupportedDesktop)
+}

@@ -1,4 +1,4 @@
-use std::{io, string::FromUtf8Error, string::FromUtf16Error};
+use std::{io, string::FromUtf16Error, string::FromUtf8Error};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -36,4 +36,7 @@ pub enum Error {
 
     #[error("Unsupported Desktop")]
     UnsupportedDesktop,
+
+    #[error("Unknown mode")]
+    UnknownMode,
 }

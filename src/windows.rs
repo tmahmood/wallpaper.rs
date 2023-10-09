@@ -1,3 +1,4 @@
+use crate::Error;
 use crate::{Mode, Result};
 use std::ffi::OsStr;
 use std::io;
@@ -89,4 +90,24 @@ pub fn set_mode(mode: Mode) -> Result<()> {
 
     // updates wallpaper
     set_from_path(&get()?)
+}
+
+pub fn get_mode() -> Result<Mode> {
+    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let desktop = hkcu.open_subkey(r"Control Panel\Desktop")?;
+
+    let tile_wallpaper: String = desktop.get_value("TileWallpaper")?;
+    let wallpaper_style: String = desktop.get_value("WallpaperStyle")?;
+
+    let mode = match (tile_wallpaper.as_str(), wallpaper_style.as_str()) {
+        ("1", _) => Mode::Tile,
+        ("0", "0") => Mode::Center,
+        (_, "6") => Mode::Fit,
+        (_, "22") => Mode::Span,
+        (_, "2") => Mode::Stretch,
+        (_, "10") => Mode::Crop,
+        _ => return Err(Error::UnknownMode),
+    };
+
+    Ok(mode)
 }
