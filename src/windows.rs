@@ -45,12 +45,8 @@ pub fn set_from_path(path: &str) -> Result<()> {
             // append null byte
             .chain(iter::once(0))
             .collect::<Vec<u16>>();
-        let successful = SystemParametersInfoW(
-            SPI_SETDESKWALLPAPER,
-            0,
-            path.as_ptr() as *mut c_void,
-            SPIF_UPDATEINIFILE | SPIF_SENDCHANGE,
-        ) == 1;
+        let successful =
+            SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, path.as_ptr() as *mut c_void, 0) == 1;
 
         if successful {
             Ok(())
