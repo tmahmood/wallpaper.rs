@@ -7,8 +7,6 @@ use std::mem;
 use std::os::windows::ffi::OsStrExt;
 use winapi::ctypes::c_void;
 use winapi::um::winuser::SystemParametersInfoW;
-use winapi::um::winuser::SPIF_SENDCHANGE;
-use winapi::um::winuser::SPIF_UPDATEINIFILE;
 use winapi::um::winuser::SPI_GETDESKWALLPAPER;
 use winapi::um::winuser::SPI_SETDESKWALLPAPER;
 use winreg::enums::*;
