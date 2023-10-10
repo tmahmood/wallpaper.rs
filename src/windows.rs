@@ -83,9 +83,7 @@ pub fn set_mode(mode: Mode) -> Result<()> {
         }
         .to_string(),
     )?;
-
-    // updates wallpaper
-    set_from_path(&get()?)
+    Ok(())
 }
 
 pub fn get_mode() -> Result<Mode> {
