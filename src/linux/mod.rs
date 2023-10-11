@@ -85,6 +85,26 @@ pub fn set_from_path(path: &str) -> Result<()> {
     }
 }
 
+pub fn get_dark() -> Result<String> {
+    let desktop = env::var("XDG_CURRENT_DESKTOP").unwrap_or_default();
+
+    if gnome::is_compliant(&desktop) {
+        return gnome::get_dark();
+    }
+
+    Err(Error::UnsupportedDesktop)
+}
+
+pub fn set_dark_from_path(path: &str) -> Result<()> {
+    let desktop = env::var("XDG_CURRENT_DESKTOP").unwrap_or_default();
+
+    if gnome::is_compliant(&desktop) {
+        return gnome::set_dark(path);
+    }
+
+    Err(Error::UnsupportedDesktop)
+}
+
 /// Sets the wallpaper style.
 pub fn set_mode(mode: Mode) -> Result<()> {
     let desktop = env::var("XDG_CURRENT_DESKTOP").unwrap_or_default();

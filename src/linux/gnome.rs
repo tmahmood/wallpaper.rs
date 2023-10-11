@@ -21,6 +21,22 @@ pub fn set(path: &str) -> Result<()> {
     )
 }
 
+pub fn get_dark() -> Result<String> {
+    parse_dconf(
+        "gsettings",
+        &["get", "org.gnome.desktop.background", "picture-uri-dark"],
+    )
+}
+
+
+pub fn set_dark(path: &str) -> Result<()> {
+    let uri = enquote::enquote('"', &format!("file://{}", path));
+    run(
+        "gsettings",
+        &["set", "org.gnome.desktop.background", "picture-uri-dark", &uri],
+    )
+}
+
 pub fn set_mode(mode: Mode) -> Result<()> {
     run(
         "gsettings",
