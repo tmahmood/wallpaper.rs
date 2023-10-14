@@ -1,4 +1,4 @@
-mod gnome;
+pub mod gnome;
 mod kde;
 mod lxde;
 pub(crate) mod xfce;
